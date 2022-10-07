@@ -12,9 +12,6 @@ class FluentMultiversServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->bootForConsole();
-        }
     }
 
     /**
@@ -22,8 +19,6 @@ class FluentMultiversServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/fluent-multivers.php', 'fluent-multivers');
-
         $this->app->singleton('fluent-multivers', function ($app) {
             return new FluentMultivers();
         });
@@ -37,15 +32,5 @@ class FluentMultiversServiceProvider extends ServiceProvider
     public function provides()
     {
         return ['fluent-multivers'];
-    }
-
-    /**
-     * Console-specific booting.
-     */
-    protected function bootForConsole()
-    {
-        $this->publishes([
-            __DIR__.'/../config/fluent-multivers.php' => config_path('fluent-multivers.php'),
-        ], 'fluent-multivers');
     }
 }
