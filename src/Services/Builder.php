@@ -2,7 +2,7 @@
 
 namespace Vormkracht10\FluentMultivers\Services;
 
-use Laveto\LaravelMultivers\Facades\Multivers;
+use namespace App\Connectors\Multivers;
 
 class Builder
 {
@@ -21,11 +21,11 @@ class Builder
 
     public function get(): array
     {
-        return Multivers::get($this->query);
+        return Multivers::execute($this->query, 'get');
     }
 
     public function post(): array
     {
-        return Multivers::post($this->query, $this->attributes);
+        return Multivers::execute($this->query, 'post', $this->attributes);
     }
 }
